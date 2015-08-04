@@ -18,15 +18,29 @@ class Quiz:
             self.questions.append(question)
 
 
-
-
-
     def take_quiz(self):
-        pass
+        self.start_time = datetime.datetime.now()
+
+        for question in self.questions:
+            self.answers.append(self.ask(question))
+        else:
+            self.end_time = datetime.datetime.now()
+        return self.summary()
 
 
     def ask(self, question):
-        pass
+        correct = False
+        # log start time
+        question_start = datetime.datetime.now()
+        #capture answer
+        answer = input(question.text + ' = ')
+        #check the answer
+        if answer == str(question.answer):
+            correct = True
+        #log the end time
+        question_end = datetime.datetime.now()
+        return correct, question_end - question_start
+
 
     def total_correct(self):
         total = 0
@@ -42,3 +56,6 @@ class Quiz:
         print("It took you {} seconds total.".format(
             (self.end_time-self.start_time).seconds
         ))
+
+
+Quiz().take_quiz()
